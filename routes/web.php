@@ -1,5 +1,10 @@
 <?php
 
+use App\Employee;
+use Illuminate\Support\Facades\Auth;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('store', 'employeeController@store');
 Route::get('show', 'employeeController@show');
+Route::any('/search','employeeController@search');
+
+

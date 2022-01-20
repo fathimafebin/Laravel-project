@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Input;
 use App\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -119,4 +119,23 @@ class employeeController extends Controller
     {
         //
     }
+     public function search(Employee $employee)
+    {
+     $employees = Employee::paginate(10);
+      
+    $q = Input::get ( 'q' );
+
+    $users = Employee::where('registration_id',$q)->first();
+    
+    if($users !== 0){
+        
+    return view('Dashboard.search_result',compact('users'));
+    
+    }
+    else{
+        return view ('Dashboard.search_result',compact('users'))->withMessage('No Details found. Try to search again !');
+    }
+
+    }
+
 }
